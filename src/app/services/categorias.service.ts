@@ -5,25 +5,24 @@ import { Categoria } from '../models/Categoria';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
+    'Content-Type': 'application/json',
+  }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoriasService {
-
   url: string = 'api/Categorias';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   PegarTodos(): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(this.url);
   }
 
   PegarCategoriaPeloId(categoriaId: number): Observable<Categoria> {
-    const apiUrl = `$(this.url)/${categoriaId}`;
+    const apiUrl = `${this.url}/${categoriaId}`;
     return this.http.get<Categoria>(apiUrl);
   }
 
@@ -31,7 +30,10 @@ export class CategoriasService {
     return this.http.post<Categoria>(this.url, categoria, httpOptions);
   }
 
-  AtualizarCategoria(categoriaId: number, categoria: Categoria): Observable<any> {
+  AtualizarCategoria(
+    categoriaId: number,
+    categoria: Categoria
+  ): Observable<any> {
     const apiUrl = `${this.url}/${categoriaId}`;
     return this.http.put<Categoria>(apiUrl, categoria, httpOptions);
   }
